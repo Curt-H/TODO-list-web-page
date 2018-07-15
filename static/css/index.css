@@ -1,0 +1,47 @@
+body {
+    text-align: center;
+}
+
+img {
+    width: 30px;
+    height: 30px;
+}
+
+div.wonder-form {
+    width: 300px;
+    height: 200px;
+    float: left;
+    border: solid 2px;
+    margin: 5px;
+    padding: 5px;
+}
+
+button {
+    border: none;
+    background-color: black;
+    color: white;
+    text-align: center;
+    width: 50px;
+    height: 30px;
+    margin: 10px 0;
+}
+
+#id-wonder-strict {
+    border: solid 1px;
+    width: 648px;
+    margin: 0 auto;
+}
+
+#id-wonder-strict::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+#id-info-area {
+    width: 628px;
+    border: solid 1px;
+    margin: 10px auto;
+    padding: 0 10px;
+    text-align: left;
+}

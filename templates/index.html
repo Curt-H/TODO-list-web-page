@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>INDEX</title>
+    <link rel="stylesheet" type="text/css" href="/static/css?f=index.css">
+</head>
+
+<body>
+<h1>Welcome!</h1>
+
+<img src="/static?f=avatar.jpg">
+<img src="/static?f=avatar.jpg">
+<img src="/static?f=avatar.jpg">
+<img src="/static?f=avatar.jpg">
+<div id="id-info-area">
+    <h2>method: {{ r.method }}</h2>
+    <h2>path: {{ r.path }}</h2>
+    <h2>args: {{ r.args }}</h2>
+    <h2>form: {{ r.form }}</h2>
+</div>
+
+<div id="id-wonder-strict">
+    <div class="wonder-form">
+        <form action="/" method="get">
+            <p>Input a name</p>
+            <div>
+                <input name="name" placeholder="Input a name" autocomplete="off">
+            </div>
+            <p>Input a value</p>
+            <div>
+                <input name="value" placeholder="Input a value" autocomplete="off">
+            </div>
+            <div>
+                <button type="submit">GET</button>
+            </div>
+        </form>
+    </div>
+    <div class="wonder-form">
+        <form action="/" method="post">
+            <p>Input a name</p>
+            <div>
+                <input name="name" placeholder="Input a name" autocomplete="off">
+            </div>
+            <p>Input a value</p>
+            <div>
+                <input name="value" placeholder="Input a value" autocomplete="off">
+            </div>
+            <div>
+                <button type="submit">POST</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
