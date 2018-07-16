@@ -1,14 +1,11 @@
 import time
 
 from models.todo import Todo
-from request import Request
 from route import generate_header
 from util import log
 
 
 def api_todo_all(request):
-    r = request
-
     ms = Todo.all()
     body = [m.json() for m in ms]
     header = generate_header(len(body), content_type='application/json')
