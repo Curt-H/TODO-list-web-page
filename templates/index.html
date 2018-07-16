@@ -2,56 +2,27 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>INDEX</title>
+    <title>Todo</title>
     <link rel="stylesheet" type="text/css" href="/static/css?f=index.css">
+    <link rel="stylesheet" type="text/css" href="/static/css?f=base-min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css?f=buttons-min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css?f=forms-min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css?f=grids-core-min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css?f=grids-min.css">
 </head>
 
 <body>
 <h1>Welcome!</h1>
 
-<img src="/static?f=avatar.jpg">
-<img src="/static?f=avatar.jpg">
-<img src="/static?f=avatar.jpg">
-<img src="/static?f=avatar.jpg">
-<div id="id-info-area">
-    <h2>method: {{ r.method }}</h2>
-    <h2>path: {{ r.path }}</h2>
-    <h2>args: {{ r.args }}</h2>
-    <h2>form: {{ r.form }}</h2>
+<div id="id-todo-input-panel" class="pure-form">
+    <input id="id-todo-input" class="pure-input-1-2" name="content" placeholder="Please input TODO">
+    <button id="id-todo-submit" class="pure-button pure-button-primary" type="submit">发布</button>
 </div>
 
-<div id="id-wonder-strict">
-    <div class="wonder-form">
-        <form action="/" method="get">
-            <p>Input a name</p>
-            <div>
-                <input name="name" placeholder="Input a name" autocomplete="off">
-            </div>
-            <p>Input a value</p>
-            <div>
-                <input name="value" placeholder="Input a value" autocomplete="off">
-            </div>
-            <div>
-                <button type="submit">GET</button>
-            </div>
-        </form>
-    </div>
-    <div class="wonder-form">
-        <form action="/" method="post">
-            <p>Input a name</p>
-            <div>
-                <input name="name" placeholder="Input a name" autocomplete="off">
-            </div>
-            <p>Input a value</p>
-            <div>
-                <input name="value" placeholder="Input a value" autocomplete="off">
-            </div>
-            <div>
-                <button type="submit">POST</button>
-            </div>
-        </form>
-    </div>
+<div id="id-todo-list" class="pure-g">
 </div>
 
+<script src="/static/js?f=base.js"></script>
+<script src="/static/js?f=api_todo.js"></script>
 </body>
 </html>

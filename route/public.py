@@ -22,7 +22,7 @@ def image(request):
 
     with open(file, 'rb') as f:
         body = f.read()
-    header = generate_header(len(body), content_type=f'img/{file_type}')
+    header = generate_header(content_type=f'img/{file_type}')
 
     response = header.encode() + body
     return response
@@ -37,7 +37,22 @@ def css(request):
 
     with open(file, 'r') as f:
         body = f.read()
-    header = generate_header(len(body), content_type=f'text/css')
+    header = generate_header(content_type=f'text/css')
+
+    response = header + body
+    return response.encode()
+
+
+def js(request):
+    r = request
+    # 获取文件的文件名和路径
+    filename = r.args.get('f', 'error.js')
+    file = f'static/js/{filename}'
+    log(f'GET file info\nname:{filename}\ntype:css\npath:{file}')
+
+    with open(file, 'r', encoding='utf-8') as f:
+        body = f.read()
+    header = generate_header(content_type=f'application/x-javascript')
 
     response = header + body
     return response.encode()
@@ -57,5 +72,6 @@ def route_public():
         '/': index,
         '/static': image,
         '/static/css': css,
+        '/static/js': js,
     }
     return route_dict

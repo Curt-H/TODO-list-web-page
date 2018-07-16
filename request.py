@@ -43,7 +43,7 @@ class Request(object):
         elif self.method == 'POST':
             self.path = path_with_args
             self.body = urllib.parse.unquote_plus(self.body)
-            if self.body != '':
+            if self.body != '' and self.body.find('=') != -1:
                 form_list = self.body.split('&')
                 for a in form_list:
                     k, v = a.split('=')

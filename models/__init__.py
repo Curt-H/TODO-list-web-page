@@ -105,7 +105,7 @@ class Model(object):
         return f'{classname}\n' + '\n'.join(attributes)
 
     def json(self):
-        return json.dumps(self.__dict__)
+        return self.__dict__
 
 
 if __name__ == '__main__':
