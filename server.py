@@ -1,58 +1,9 @@
 import _thread
-import urllib.parse
 
-from model import save, load
-from model.todo import Todo
+from request import Request
 from util import log
 from socket import socket
 from route.public import route_public
-
-
-class Request(object):
-    def __init__(self, request):
-        """
-        :param request: receieved from server, string and cannot be null
-        """
-        # Initialize the origin data
-        self.method = ''
-        self.path = ''
-        self.args = dict()
-        self.form = dict()
-
-        # Dealing with the request
-        self.raw_data = request
-        self.header, self.body = request.split('\r\n\r\n')
-        self.analyse_header()
-
-    def analyse_header(self):
-        request_line = self.header.split('\r\n')[0]
-        request_line_element = request_line.split(' ')
-
-        self.method = request_line_element[0]
-        path_with_args = request_line_element[1]
-
-        self.analyse_const(path_with_args)
-
-    def analyse_const(self, path_with_args):
-        """
-        :param path_with_args: path like this '/index?foo=bar'
-        :return: None
-        """
-        self.path = path_with_args
-        if self.method == 'GET' and path_with_args.find('?') > 0:
-            self.path, args_str = path_with_args.split('?')
-            args_str = urllib.parse.unquote_plus(args_str)
-
-            for a in args_str.split('&'):
-                k, v = a.split('=')
-                self.args[k] = v
-        elif self.method == 'POST':
-            self.path = path_with_args
-            if self.body != '':
-                form_list = self.body.split('&')
-                for a in form_list:
-                    k, v = a.split('=')
-                    self.form[k] = v
 
 
 def recieve_request(connection):
