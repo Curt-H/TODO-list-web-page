@@ -52,10 +52,10 @@ def error(request):
     return response.encode()
 
 
-def route_public(path):
+def route_public():
     route_dict = {
         '/': index,
         '/static': image,
         '/static/css': css,
     }
-    return route_dict.get(path, error)
+    return route_dict

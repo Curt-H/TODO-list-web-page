@@ -104,6 +104,9 @@ class Model(object):
         attributes = [f'{k}: {v}' for k, v in class_attr.items()]
         return f'{classname}\n' + '\n'.join(attributes)
 
+    def json(self):
+        return json.dumps(self.__dict__)
+
 
 if __name__ == '__main__':
     pass

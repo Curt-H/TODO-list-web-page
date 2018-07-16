@@ -1,9 +1,17 @@
 import _thread
 
 from request import Request
+from route.api_todo import route_api_todo
 from util import log
 from socket import socket
-from route.public import route_public
+from route.public import route_public, error
+
+
+def route_dict():
+    r = dict()
+    r.update(route_public())
+    r.update(route_api_todo())
+    return r
 
 
 def recieve_request(connection):
@@ -22,7 +30,9 @@ def recieve_request(connection):
 def make_response(request):
     r = request
 
-    response = route_public(r.path)(r)
+    route = route_dict().get(r.path, error)
+    response = route(r)
+
     log(response)
     return response
 
