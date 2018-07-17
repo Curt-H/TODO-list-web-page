@@ -26,9 +26,26 @@ def api_todo_add(request):
     return json_response(m.json()).encode()
 
 
+def api_todo_delete(request):
+    r = request
+
+    form = r.json()
+    log('JSON form', form)
+
+    Todo.delete(int(form['id']))
+    log(f'Form is:\n {form}')
+
+    response = {
+        state_code: 0
+    }
+
+    return json_response(response).encode()
+
+
 def route_api_todo():
     route_dict = {
         '/api/todo/add': api_todo_add,
         '/api/todo/all': api_todo_all,
+        '/api/todo/delete': api_todo_delete,
     }
     return route_dict

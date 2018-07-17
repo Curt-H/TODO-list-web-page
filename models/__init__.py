@@ -62,7 +62,9 @@ class Model(object):
         ms = cls.all()
         for i, m in enumerate(ms):
             if m.id == model_id:
+                log(f'Deleting {ms[i]}')
                 del ms[i]
+                log('Deleting finished')
                 break
 
         d = [m.__dict__ for m in ms]
