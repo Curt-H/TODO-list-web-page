@@ -5,9 +5,14 @@ let apiTodoAll = function (callback) {
 };
 
 let apiTodoAdd = function (form, callback) {
-    let path = 'api/todo/add';
+    let path = '/api/todo/add';
     ajax('POST', path, form, callback)
 };
+
+let apiTodoDelete = function (form, callback) {
+    let path = '/api/todo/delete'
+    ajax('POST', path, form, callback)
+}
 
 let todoTemplate = function (todo) {
     let temp = `
@@ -68,8 +73,17 @@ let bindEventTodoAdd = function () {
     })
 };
 
+let bindEventTodoDelete = function () {
+    let todoList = e('#id-todo-list')
+    todoList.addEventListener('click', function (t) {
+        self = t.target
+        log('被点击的元素', self)
+    })
+}
+
 let bindEvents = function () {
     bindEventTodoAdd()
+    bindEventTodoDelete()
 };
 
 let __main = function () {
