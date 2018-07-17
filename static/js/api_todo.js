@@ -61,6 +61,7 @@ let bindEventTodoAdd = function () {
             content: content,
         };
         log('表单数据:', form);
+        input.value = ""
         apiTodoAdd(form, function (todo) {
             insertTodo(todo)
         })
