@@ -14,6 +14,11 @@ let apiTodoDelete = function (form, callback) {
     ajax('POST', path, form, callback)
 };
 
+let apiTodoUpdate = function (form, callback) {
+    let path = '/api/todo/update';
+    ajax('POST', path, form, callback)
+};
+
 let todoTemplate = function (todo) {
     let template = `
     <div class="pure-u-1-1">
@@ -29,6 +34,18 @@ let todoTemplate = function (todo) {
         </div>
     </div>
     </div>
+    `;
+    return template
+};
+
+let todoEditTemplate = function (todo) {
+    let template = `
+    <div class="pure-u-1-1">
+    <div class="todo-edit-cell" data-id="${todo.id}">
+        <input class="todo-edit-content " value="${todo.content}">
+        <input class="todo-update pure-button pure-button-primary" value="UPDATE" type="submit">
+    </div>
+    </div>    
     `;
     return template
 };
@@ -80,8 +97,8 @@ let bindEventTodoDelete = function () {
         log('被点击的元素', self);
         log('此元素的Class List', self.classList);
 
-        if (self.classList.contains('todo-delete')){
-            log('点击了删除按钮', self)
+        if (self.classList.contains('todo-delete')) {
+            log('点击了删除按钮', self);
 
             let todoCell = self.closest('.todo-cell');
             let todoId = todoCell.dataset['id'];
@@ -91,7 +108,32 @@ let bindEventTodoDelete = function () {
             log('要被删除的TODO id:', form);
 
             apiTodoDelete(form, function () {
-                todoCell.remove()
+                todoCell.remove();
+                alert('删除成功')
+            })
+        }
+    })
+};
+
+let bindEventTodoUpdate = function () {
+    let todoList = e('#id-todo-list');
+    todoList.addEventListener('click', function (t) {
+        self = t.target;
+        log('被点击的元素', self);
+        log('此元素的Class List', self.classList);
+
+        if (self.classList.contains('todo-edit')) {
+            log('点击了编辑按钮', self);
+
+            let todoCell = self.closest('.todo-cell');
+            let todoId = todoCell.dataset['id'];
+            let form = {
+                id: todoId,
+            };
+            log('要被删除的TODO id:', form);
+
+            apiTodoDelete(form, function () {
+                todoCell.remove();
                 alert('删除成功')
             })
         }
@@ -100,7 +142,8 @@ let bindEventTodoDelete = function () {
 
 let bindEvents = function () {
     bindEventTodoAdd();
-    bindEventTodoDelete()
+    bindEventTodoDelete();
+    bindEventTodoEdit()
 };
 
 let __main = function () {
