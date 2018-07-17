@@ -14,7 +14,7 @@ def save(fname, data):
     d = data
     file = fname
 
-    with open(file, 'w') as f:
+    with open(file, 'w', encoding='utf-8') as f:
         json.dump(d, f, indent=2, ensure_ascii=False)
 
 
