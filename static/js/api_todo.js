@@ -10,14 +10,14 @@ let apiTodoAdd = function (form, callback) {
 };
 
 let apiTodoDelete = function (form, callback) {
-    let path = '/api/todo/delete'
+    let path = '/api/todo/delete';
     ajax('POST', path, form, callback)
-}
+};
 
 let todoTemplate = function (todo) {
-    let temp = `
+    let template = `
     <div class="pure-u-1-1">
-    <div class="todo-cell">
+    <div class="todo-cell" data-id="${todo.id}">
 
         <div class="todo-content">
             <p>${todo.content}</p>
@@ -30,7 +30,7 @@ let todoTemplate = function (todo) {
     </div>
     </div>
     `;
-    return temp
+    return template
 };
 
 let insertTodo = function (todo) {
@@ -66,7 +66,7 @@ let bindEventTodoAdd = function () {
             content: content,
         };
         log('表单数据:', form);
-        input.value = ""
+        input.value = "";
         apiTodoAdd(form, function (todo) {
             insertTodo(todo)
         })
@@ -74,15 +74,32 @@ let bindEventTodoAdd = function () {
 };
 
 let bindEventTodoDelete = function () {
-    let todoList = e('#id-todo-list')
+    let todoList = e('#id-todo-list');
     todoList.addEventListener('click', function (t) {
-        self = t.target
-        log('被点击的元素', self)
+        self = t.target;
+        log('被点击的元素', self);
+        log('此元素的Class List', self.classList);
+
+        if (self.classList.contains('todo-delete')){
+            log('点击了删除按钮', self)
+
+            let todoCell = self.closest('.todo-cell');
+            let todoId = todoCell.dataset['id'];
+            let form = {
+                id: todoId,
+            };
+            log('要被删除的TODO id:', form);
+
+            apiTodoDelete(form, function () {
+                todoCell.remove()
+                alert('删除成功')
+            })
+        }
     })
-}
+};
 
 let bindEvents = function () {
-    bindEventTodoAdd()
+    bindEventTodoAdd();
     bindEventTodoDelete()
 };
 
