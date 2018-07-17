@@ -7,7 +7,7 @@ def log(*args, **kwargs):
     dt = strftime(time_format, time_now)
     print(dt)
     print(*args, **kwargs)
-    print('*' * 15)
+    print('*' * 15, '\n')
 
     with open('log.txt', 'a+') as f:
         print(dt, file=f)
