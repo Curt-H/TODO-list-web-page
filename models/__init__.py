@@ -5,7 +5,7 @@ from util import log
 
 def load(fname):
     file = fname
-    with open(file, 'r') as f:
+    with open(file, 'r', encoding='utf-8') as f:
         d = json.load(f)
     return d
 
