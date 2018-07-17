@@ -17,7 +17,12 @@ let ajax = function (method, path, data, responseCallback) {
             let json = JSON.parse(r.response);
             log('load json type:', typeof(json));
 
-            responseCallback(json)
+            if (r.state_code === '1') {
+                alert('ERROR')
+            }
+            else {
+                responseCallback(json)
+            }
         }
     };
     data = JSON.stringify(data);

@@ -36,7 +36,7 @@ def api_todo_delete(request):
     log(f'Form is:\n {form}')
 
     response = {
-        state_code: 0
+        state_code: '0'
     }
 
     return json_response(response).encode()
