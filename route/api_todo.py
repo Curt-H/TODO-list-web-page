@@ -36,10 +36,23 @@ def api_todo_delete(request):
     log(f'Form is:\n {form}')
 
     response = {
-        state_code: '0'
+        'state_code': '0'
     }
 
     return json_response(response).encode()
+
+
+def api_todo_update(request):
+    r = request
+
+    form = r.json()
+    log('JSON form', form)
+
+    log(f'Form is:\n {form}')
+    form['update_time'] = time.time()
+    m = Todo.update(form)
+
+    return json_response(m.json()).encode()
 
 
 def route_api_todo():
@@ -47,5 +60,6 @@ def route_api_todo():
         '/api/todo/add': api_todo_add,
         '/api/todo/all': api_todo_all,
         '/api/todo/delete': api_todo_delete,
+        '/api/todo/update': api_todo_update,
     }
     return route_dict

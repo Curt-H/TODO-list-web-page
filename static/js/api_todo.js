@@ -44,7 +44,6 @@ let todoEditTemplate = function (todo) {
         <input class="todo-edit-content " value="${todo}">
         <input class="todo-update pure-button pure-button-primary" value="UPDATE" type="submit">
     </div>
-    <br>
     `;
     return template
 };
@@ -159,8 +158,10 @@ let bindEventTodoUpdate = function () {
             }
             log('需要更新的数据', form)
 
-            apiTodoUpdate(form, function () {
-                updateContent.parent.remove()
+            apiTodoUpdate(form, function (todo) {
+                let p = e('p', content)
+                p.innerText = todo.content
+                updateContent.closest('.todo-edit-input').remove()
                 alert('更新完成')
             })
         }
@@ -171,6 +172,7 @@ let bindEvents = function () {
     bindEventTodoAdd();
     bindEventTodoDelete();
     bindEventTodoEdit()
+    bindEventTodoUpdate()
 };
 
 let __main = function () {
