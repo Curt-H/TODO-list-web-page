@@ -21,7 +21,7 @@ let apiTodoUpdate = function (form, callback) {
 
 let todoTemplate = function (todo) {
     let template = `
-    <div class="pure-u-1-1">
+    <div class="pure-u-1-2">
     <div class="todo-cell" data-id="${todo.id}">
 
         <div class="todo-content">

@@ -21,3 +21,8 @@ div.todo-cell {
     margin: 5px;
     padding: 5px;
 }
+
+div.todo-edit-input {
+    margin: 5px;
+    padding: 5px;
+}
