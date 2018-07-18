@@ -160,6 +160,7 @@ let bindEventTodoUpdate = function () {
             log('需要更新的数据', form)
 
             apiTodoUpdate(form, function () {
+                updateContent.parent.remove()
                 alert('更新完成')
             })
         }
