@@ -140,6 +140,32 @@ let bindEventTodoEdit = function () {
     })
 };
 
+let bindEventTodoUpdate = function () {
+    let todoList = e('#id-todo-list');
+    todoList.addEventListener('click', function (t) {
+        self = t.target;
+        log('被点击的元素', self);
+        log('此元素的Class List', self.classList);
+
+        if (self.classList.contains('todo-update')) {
+            log('点击了编辑按钮', self);
+
+            let todoCell = self.closest('.todo-cell');
+            let content = e('.todo-content', todoCell);
+            let updateContent = e('.todo-edit-content', content)
+            let form = {
+                id: todoCell.dataset['id'],
+                content: updateContent.value
+            }
+            log('需要更新的数据', form)
+
+            apiTodoUpdate(form, function () {
+                alert('更新完成')
+            })
+        }
+    })
+};
+
 let bindEvents = function () {
     bindEventTodoAdd();
     bindEventTodoDelete();
