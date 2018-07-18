@@ -28,7 +28,7 @@ let todoTemplate = function (todo) {
             <p>${todo.content}</p>
         </div>
 
-        <div class="todo-edit">
+        <div class="todo-edit-cell">
             <input class="todo-edit pure-button pure-button-primary" value="EDIT" type="submit">
             <input class="todo-delete pure-button pure-button-primary" value="DELE" type="submit">
         </div>
@@ -40,12 +40,11 @@ let todoTemplate = function (todo) {
 
 let todoEditTemplate = function (todo) {
     let template = `
-    <div class="pure-u-1-1">
-    <div class="todo-edit-cell" data-id="${todo.id}">
-        <input class="todo-edit-content " value="${todo.content}">
+    <div class="todo-edit-input">
+        <input class="todo-edit-content " value="${todo}">
         <input class="todo-update pure-button pure-button-primary" value="UPDATE" type="submit">
     </div>
-    </div>    
+    <br>
     `;
     return template
 };
@@ -54,6 +53,11 @@ let insertTodo = function (todo) {
     let todoCell = todoTemplate(todo);
     let todolist = e('#id-todo-list');
     todolist.insertAdjacentHTML('beforeend', todoCell)
+};
+
+let insertTodoEdit = function (todo, todoCell) {
+    let todoEdit = todoEditTemplate(todo);
+    todoCell.insertAdjacentHTML('beforeend', todoEdit)
 };
 
 let loadTodos = function () {
@@ -115,7 +119,7 @@ let bindEventTodoDelete = function () {
     })
 };
 
-let bindEventTodoUpdate = function () {
+let bindEventTodoEdit = function () {
     let todoList = e('#id-todo-list');
     todoList.addEventListener('click', function (t) {
         self = t.target;
@@ -126,16 +130,12 @@ let bindEventTodoUpdate = function () {
             log('点击了编辑按钮', self);
 
             let todoCell = self.closest('.todo-cell');
-            let todoId = todoCell.dataset['id'];
-            let form = {
-                id: todoId,
-            };
-            log('要被删除的TODO id:', form);
+            let content = e('.todo-content', todoCell);
 
-            apiTodoDelete(form, function () {
-                todoCell.remove();
-                alert('删除成功')
-            })
+            log(e('.todo-edit-input', content));
+            if (e('.todo-edit-input', content) == null) {
+                insertTodoEdit(content.innerText, content)
+            }
         }
     })
 };
