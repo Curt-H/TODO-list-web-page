@@ -5,7 +5,7 @@ from util import log
 
 def load(fname):
     file = fname
-    with open(file, 'r') as f:
+    with open(file, 'r', encoding='utf-8') as f:
         d = json.load(f)
     return d
 
@@ -14,7 +14,7 @@ def save(fname, data):
     d = data
     file = fname
 
-    with open(file, 'w') as f:
+    with open(file, 'w', encoding='utf-8') as f:
         json.dump(d, f, indent=2, ensure_ascii=False)
 
 
@@ -62,7 +62,9 @@ class Model(object):
         ms = cls.all()
         for i, m in enumerate(ms):
             if m.id == model_id:
+                log(f'Deleting {ms[i]}')
                 del ms[i]
+                log('Deleting finished')
                 break
 
         d = [m.__dict__ for m in ms]
