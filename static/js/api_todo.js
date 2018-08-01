@@ -21,7 +21,7 @@ let apiTodoUpdate = function (form, callback) {
 
 let todoTemplate = function (todo) {
     let template = `
-    <div class="pure-u-1-2">
+    <div class="todo-block pure-u-1-2">
     <div class="todo-cell" data-id="${todo.id}">
 
         <div class="todo-content">
@@ -111,7 +111,7 @@ let bindEventTodoDelete = function () {
             log('要被删除的TODO id:', form);
 
             apiTodoDelete(form, function () {
-                todoCell.remove();
+                todoCell.parentElement.remove()
                 alert('删除成功')
             })
         }
@@ -151,17 +151,17 @@ let bindEventTodoUpdate = function () {
 
             let todoCell = self.closest('.todo-cell');
             let content = e('.todo-content', todoCell);
-            let updateContent = e('.todo-edit-content', content)
+            let updateContent = e('.todo-edit-content', content);
             let form = {
                 id: todoCell.dataset['id'],
                 content: updateContent.value
-            }
-            log('需要更新的数据', form)
+            };
+            log('需要更新的数据', form);
 
             apiTodoUpdate(form, function (todo) {
-                let p = e('p', content)
-                p.innerText = todo.content
-                updateContent.closest('.todo-edit-input').remove()
+                let p = e('p', content);
+                p.innerText = todo.content;
+                updateContent.closest('.todo-edit-input').remove();
                 alert('更新完成')
             })
         }
@@ -171,7 +171,7 @@ let bindEventTodoUpdate = function () {
 let bindEvents = function () {
     bindEventTodoAdd();
     bindEventTodoDelete();
-    bindEventTodoEdit()
+    bindEventTodoEdit();
     bindEventTodoUpdate()
 };
 
